@@ -1,0 +1,56 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cat-service
+  labels:
+    app: cat
+spec:
+  type: ClusterIP
+  ports:
+  - port: 5001
+    protocol: TCP
+    targetPort: 5001
+  selector:
+    app: cat
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: cat
+  annotations:
+    kubernetes.io/change-cause: "mkubik/cat:latest"
+spec:
+  template:
+    metadata:
+      labels:
+        app: cat
+    spec:
+      containers:
+      - name: cat
+        image: mkubik/cat:latest
+        env:
+        - name: VCAP_APP_PORT
+          value: "5001"
+        - name: MONGODB_URI
+          value: "mongodb://davetropeano:rat121212@ds053784.mongolab.com:53784/eyeglasses"
+        ports:
+        - containerPort: 5001
+        resources:
+          requests:
+            cpu: 100m
+      imagePullSecrets:
+        - name: image-repo-secret
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: cat
+spec:
+  scaleTargetRef:
+    apiVersion: extensions/v1beta1
+    kind: Deployment
+    name: cat
+  minReplicas: 2
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 80

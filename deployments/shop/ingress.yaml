@@ -1,0 +1,22 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: myminikube-test
+  annotations:
+    ingress.kubernetes.io/rewrite-target: /
+spec:
+  tls:
+  - hosts:
+    - ${HOSTNAME}
+  backend:
+    serviceName: ui-service
+    servicePort: 80
+  rules:
+  - host: ${HOSTNAME}
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: ui-service
+          servicePort: 5000

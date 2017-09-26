@@ -1,0 +1,54 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cart-service
+  labels:
+    app: cart
+spec:
+  type: ClusterIP
+  ports:
+  - port: 5002
+    protocol: TCP
+    targetPort: 5002
+  selector:
+    app: cart
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: cart
+  annotations:
+    kubernetes.io/change-cause: "mkubik/cart:latest"
+spec:
+  template:
+    metadata:
+      labels:
+        app: cart
+    spec:
+      containers:
+      - name: cart
+        image: mkubik/cart:latest
+        env:
+        - name: VCAP_APP_PORT
+          value: "5002"
+        ports:
+        - containerPort: 5002
+        resources:
+          requests:
+            cpu: 100m
+      imagePullSecrets:
+        - name: image-repo-secret
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: cart
+spec:
+  scaleTargetRef:
+    apiVersion: extensions/v1beta1
+    kind: Deployment
+    name: cart
+  minReplicas: 2
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 80
