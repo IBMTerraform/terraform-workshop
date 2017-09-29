@@ -32,8 +32,12 @@ spec:
         env:
         - name: VCAP_APP_PORT
           value: "5001"
-        - name: MONGODB_URI
-          value: "mongodb://davetropeano:rat121212@ds053784.mongolab.com:53784/eyeglasses"
+        - name: CLOUDANT_USER
+          value: "${CLOUDANT_USER}"
+        - name: CLOUDANT_PASS
+          value: "${CLOUDANT_PASS}"
+        - name: CLOUDANT_URL
+          value: "${CLOUDANT_URL}"
         ports:
         - containerPort: 5001
         resources:

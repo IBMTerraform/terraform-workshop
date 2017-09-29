@@ -2,9 +2,9 @@
 DBURL=$1
 echo $DBURL
 
-curl -X PUT -H "Accept: application/json" -H 'Content-Type:application/json' $DBURL/products
+curl -X PUT $DBURL/products
 echo RC=$?
-curl -X PUT -H "Accept: application/json" -H 'Content-Type:application/json' $DBURL/categories
+curl -X PUT $DBURL/categories
 echo RC=$?
 echo curl -d @./categories.json -X POST -H 'Accept: application/json' -H 'Content-Type:application/json' $DBURL/categories/_bulk_docs
 curl -d @./categories.json -X POST -H 'Accept: application/json' -H 'Content-Type:application/json' $DBURL/categories/_bulk_docs

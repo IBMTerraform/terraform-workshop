@@ -2,16 +2,16 @@
 # Required variables
 ################################################
 variable "ibm_bmx_api_key" {
-  type = "string"
-  description = "Your Bluemix API Key (optional)"
+  type                        = "string"
+  description                 = "Your Bluemix API Key (optional)"
 }
 
 variable "myOrg" {
-  type = "string"
-  description = "Your Bluemix ORG"
+  type                        = "string"
+  description                 = "Your Bluemix ORG"
 }
 
 variable "mySpace" {
-  type = "string"
-  description = "Your Bluemix Space"
+  type                        = "string"
+  description                 = "Your Bluemix Space"
 }
