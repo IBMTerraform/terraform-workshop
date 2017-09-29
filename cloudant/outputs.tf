@@ -10,14 +10,14 @@ output "shopDbURL" {
   value = "${ibm_service_key.serviceKey.credentials.url}"
 }
 
-#output "shopDbHost" {
-#  value = "${ibm_service_key.serviceKey.credentials.host}"
-#}
+output "shopDbHost" {
+  value = "${ibm_service_key.serviceKey.credentials.host}"
+}
 
-#output "shopDbUser" {
-#  value = "${ibm_service_key.serviceKey.credentials.username}"
-#}
+output "shopDbUser" {
+  value = "${ibm_service_key.serviceKey.credentials.username}"
+}
 
-#output "shopDbPassword" {
-#  value = "${ibm_service_key.serviceKey.credentials.password}"
-#}
+output "shopDbPassword" {
+  value = "${ibm_service_key.serviceKey.credentials.password}"
+}
