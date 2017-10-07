@@ -7,8 +7,8 @@
 1. Logon to your Lab machine
 2. Open a browser
 3. Point your browser to "https://console.bluemix.net", click the "Login" button and provide the credentials.
-4. Once logged in, switch to Region _US South_, Organization _ICU2017_ and Space _dev_ like shown ![Region _US South_, Organization _ICU2017_ and Space _dev_][images/regionselector.png]
-5. Open the main navigation on the leftmost side ![main menu][images/mainmenu.png]
+4. Once logged in, switch to Region _US South_, Organization _ICU2017_ and Space _dev_ like shown ![Region _US South_, Organization _ICU2017_ and Space _dev_](images/regionselector.png)
+5. Open the main navigation on the leftmost side ![main menu](images/mainmenu.png)
 6. Click on **Schematics** in that menu
 7. Open a new browser tab (or window) and point it to `https://github.com/ICU2017Schematics/ICU2017Lab` or simply click this <a href="https://github.com/ICU2017Schematics/ICU2017Lab">link</a>.
 
