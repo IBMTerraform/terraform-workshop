@@ -1,66 +1,47 @@
 variable "ibm_bmx_api_key" {
   type = "string"
-
-  #default = ""
   description = "Your Bluemix API Key (optional)"
 }
 
 variable "ibm_sl_username" {
   type = "string"
-
-  #default = ""
   description = "Your IBM Cloud User Name"
 }
 
 variable "ibm_sl_api_key" {
   type = "string"
-
-  #default = ""
   description = "Your IBM Cloud API Key"
 }
 
 variable "myOrg" {
   type = "string"
-
-  #default = ""
   description = "Your Bluemix ORG"
 }
 
 variable "mySpace" {
   type = "string"
-
-  #default = ""
   description = "Your Bluemix Space"
 }
 
-variable "myClustername" {
+variable "cloudantuser" {
   type = "string"
-
-  default = "myCluster"
-  description = "Your k8s cluster name"
+  description = "the cloudant user name for the shopDB"
 }
 
-variable "cloudantUrl" {
+variable "cloudantpass" {
   type = "string"
+  description = "the cloudant user password for the shopDB"
+}
 
+variable "cloudanturl" {
+  type = "string"
+  description = "the cloudant url for the shopDB"
 }
 
 ######################################################################
 # The datacenter to deploy to
 variable datacenter {
-  default = "dal06"
-}
-# The SSH Key to use on the Nginx virtual machines
-# Defined in terraform.tfvars
-variable public_key {
-  description = "Your public SSH key"
-}
-# This is stored in a file not checked into source control or passed in via command line or stored as a secret in a service wrapping terraform -- should be used with public_key_material (should be of the same key)
-variable "private_key_material" {
-  description = "The private key material used to connect via SSH; define in terraform.tfvars or if using a service like Terraform Enterprise define it there."
-  default = <<-EOF
-  ...
-  EOF
+  default = "dal10"
 }
 # The number of web nodes to deploy; You can adjust this number to create more
 # virtual machines in the IBM Cloud; adjusting this number also updates the
@@ -74,7 +55,7 @@ variable web_operating_system {
 }
 # The port that web and the loadbalancer will serve traffic on
 variable port {
-  default = "80"
+  default = "3000"
 }
 # The number of cores each web virtual guest will recieve
 variable vm_cores {
@@ -87,7 +68,7 @@ variable vm_memory {
 # Tags which will be applied to the web VMs
 variable vm_tags {
   default = [
-    "nginx",
+    "docker",
     "webserver",
     "demo"
   ]

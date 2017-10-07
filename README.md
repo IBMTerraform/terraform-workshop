@@ -7,10 +7,13 @@ This repository will create a whole web shop application as a 3-tier architectur
 **Overall Process**
 
 You should use Cloud Schematics to create this web shop infrastructure as well as the deployments.
+Please see the [step-by-step guide](Instructions.md)
 
-Terraform will be run in the root directory of this repository and will initially check the `variables.tf` and `modules.tf` files. From the `modules.tf` there are references to other modules.
+For simplicity and in interest of time, the Kubernetes cluster and the database have been pre-provisioned for this Hands-on. Therefore for those resources there is a `cloudant` and a `cloudant-ref` directory, as well as a `free-cluster`, a `shop-cluster` (which is a paid n-node cluster) and a `cluster-ref` directory. The `*.ref`directories are modules that look for existing resources.
 
-This is also the spot from where the deployments are triggered.
+This whole project is based on larger building blocks that are modeled as _Terraform Modules_, like `cloudant`, `lb_vms`. The `modules.tf` file in the root directory accumulates these modules and make up the multi-tier application environment. The `modules.tf` has multiple sections that are partially commented out but left in for educational purposes. If you fork or clone this git repository you can make changes and try variations in your own **IBM Cloud** account.
+
+Code deployments are also done through Terraform, shown in two different variations.
 
 **Backend Layer**
 
@@ -20,9 +23,9 @@ For this reason there's also no reference to the `cloudant` module but only to `
 
 **Fulfillment Layer**
 
-This runs on 2 virtual machines that are accessed through a load balancer. All artefacts are being created in the `lb_vms` module.
+This runs on 2 virtual machines that are accessed through a load balancer. All artifacts are being created in the `lb_vms` module. Provisioning of software is done through the `remote-exec` provisioner.
 
 **Shop Layer**
 
-The front-end, catalog and cart micro services are running in a 2 node Kubernetes cluster on IBM Cloud. Provisioning of the micro services is also triggered from the `modules.tf` using a provisioner that runs `kubectl`.
+The front-end, catalog, gateway and cart micro services are running in a single node Kubernetes cluster on IBM Cloud. Provisioning of the micro services is also triggered from the `modules.tf` using a provisioner that runs `kubectl`.
 The micro services are load balanced within the cluster and run in 2 instances.

@@ -10,7 +10,7 @@ spec:
   - hosts:
     - ${HOSTNAME}
   backend:
-    serviceName: ui-service
+    serviceName: website-service
     servicePort: 80
   rules:
   - host: ${HOSTNAME}
@@ -18,5 +18,5 @@ spec:
       paths:
       - path: /
         backend:
-          serviceName: ui-service
+          serviceName: website-service
           servicePort: 5000

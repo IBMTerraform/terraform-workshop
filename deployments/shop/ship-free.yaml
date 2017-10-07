@@ -1,0 +1,57 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ship-service
+  labels:
+    app: ship
+spec:
+  type: NodePort
+  ports:
+  - port: 3000
+    protocol: TCP
+    targetPort: 3000
+    nodePort: 30003
+  selector:
+    app: ship
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: ship
+  annotations:
+    kubernetes.io/change-cause: "mkubik/ship:latest"
+spec:
+  template:
+    metadata:
+      labels:
+        app: ship
+    spec:
+      containers:
+      - name: ship
+        image: mkubik/ship:latest
+        command: ["npm"]
+        args: ["start"]
+        env:
+        - name: VCAP_APP_PORT
+          value: "3000"
+        ports:
+        - containerPort: 3000
+        resources:
+          requests:
+            cpu: 100m
+      imagePullSecrets:
+        - name: image-repo-secret
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: ship
+spec:
+  scaleTargetRef:
+    apiVersion: extensions/v1beta1
+    kind: Deployment
+    name: ship
+  minReplicas: 2
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 80

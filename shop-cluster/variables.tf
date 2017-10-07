@@ -13,6 +13,12 @@ variable "ibm_sl_api_key" {
   description                 = "Your IBM Cloud API Key"
 }
 
+variable "region" {
+  type                        = "string"
+  description                 = "Bluemix region"
+  default                     = "eu-gb"
+}
+
 variable "myOrg" {
   type                        = "string"
   description                 = "Your Bluemix ORG"

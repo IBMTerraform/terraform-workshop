@@ -15,3 +15,9 @@ variable "mySpace" {
   type                        = "string"
   description                 = "Your Bluemix Space"
 }
+
+variable "region" {
+  type                        = "string"
+  description                 = "Bluemix region"
+  default                     = "eu-gb"
+}
