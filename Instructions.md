@@ -6,16 +6,17 @@
 
 1. Logon to your Lab machine
 2. Open a browser
-3. Point your browser to "https://console.bluemix.net", click the "Login" button and provide the credentials.
-4. Once logged in, switch to Region _US South_, Organization _ICU2017_ and Space _dev_ like shown ![Region _US South_, Organization _ICU2017_ and Space _dev_][images/regionselector.png]
-5. Open the main navigation on the leftmost side ![main menu][images/mainmenu.png]
-6. Click on **Schematics** in that menu
-7. Open a new browser tab (or window) and point it to `https://github.com/ICU2017Schematics/ICU2017Lab` or simply click this <a href="https://github.com/ICU2017Schematics/ICU2017Lab">link</a>.
+3. As you are reading this, you should already be here, but if you printed this instructions, point your browser to `https://github.com/ICU2017Schematics/ICU2017Lab` or simply click this <a href="https://github.com/ICU2017Schematics/ICU2017Lab">link</a>.
+4. Click on ![supplies][supplies.zip]
+4. Open a new browser tab (or window) and point it to "https://console.bluemix.net", click the "Login" button and provide the credentials.
+5. Once logged in, switch to Region _US South_, Organization _ICU2017_ and Space _dev_ like shown ![Region _US South_, Organization _ICU2017_ and Space _dev_][images/regionselector.png]
+6. Open the main navigation on the leftmost side ![main menu][images/mainmenu.png]
+7. Click on **Schematics** in that menu
 
 ---
 ### Create a Schematics Environment
 
-1. In the _IBM Cloud_ browser window, click on _Environments_. You see the list of environments if there are any.
+1. In the _Schematics_ browser window, click on _Environments_. You see the list of environments if there are any.
 2. Click on _Create Environment_ on the right upper side of the window
 3. Enter the following git URL in the _Source Control URL_ entry field:
 `https://github.com/ICU2017Schematics/ICU2017Lab`

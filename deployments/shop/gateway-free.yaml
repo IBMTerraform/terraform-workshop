@@ -35,13 +35,13 @@ spec:
           value: "5000"
         - name: CART_ENTRYPOINT
           #value: "http://cart-service.default.svc.cluster.local:5002"
-          value: "http://cart-service:30002"
+          value: "http://cart-service:5002"
         - name: CAT_ENTRYPOINT
           #value: "http://cat-service.default.svc.cluster.local:5001"
-          value: "http://cat-service:30001"
+          value: "http://cat-service:5001"
         - name: SHIP_ENTRYPOINT
           #value: "http://ship-service.default.svc.cluster.local:5001"
-          value: "http://ship-service:30003"
+          value: "${SHIP_ENDPOINT}:3000"
         ports:
         - containerPort: 5000
         resources:

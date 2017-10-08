@@ -73,7 +73,7 @@ resource "null_resource" "kube-deploy" {
 CLOUDANT_USER="${module.shopDBCloudant.shopDbUser}" \
 CLOUDANT_PASS="${module.shopDBCloudant.shopDbPassword}" \
 CLOUDANT_URL="https://${module.shopDBCloudant.shopDbHost}" \
-
+SHIP_ENDPOINT="http://${module.load-balanced-vms.loadbalancer_ipv4}"
 KUBECONFIG="${module.shopCluster.cluster_config}" \
  ./deployments/shop/kube-deploy-free.sh
 EOT
