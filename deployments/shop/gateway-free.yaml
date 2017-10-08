@@ -41,7 +41,7 @@ spec:
           value: "http://cat-service:5001"
         - name: SHIP_ENTRYPOINT
           #value: "http://ship-service.default.svc.cluster.local:5001"
-          value: "${SHIP_ENDPOINT}:3000"
+          value: "${SHIP_ENDPOINT}"
         ports:
         - containerPort: 5000
         resources:

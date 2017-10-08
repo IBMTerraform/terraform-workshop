@@ -47,11 +47,6 @@ module "load-balanced-vms" {
   ibm_bmx_api_key             = "${var.ibm_bmx_api_key}"
   ibm_sl_username             = "${var.ibm_sl_username}"
   ibm_sl_api_key              = "${var.ibm_sl_api_key}"
-  myOrg                       = "${var.myOrg}"
-  mySpace                     = "${var.mySpace}"
-  cloudanturl                 = "https://${module.shopDBCloudant.shopDbHost}"
-  cloudantpass                = "${module.shopDBCloudant.shopDbPassword}"
-  cloudantuser                = "${module.shopDBCloudant.shopDbUser}"
 }
 
 ##############################################################################
@@ -81,5 +76,13 @@ EOT
 }
 
 output "cluster_config" {
-    value                     = "${module.shopCluster.cluster_config}"
+  value                       = "${module.shopCluster.cluster_config}"
+}
+
+output "cluster_ips" {
+  value                       = "${module.shopCluster.cluster_ips}"
+}
+
+output "loadbalancer_ip" {
+  value                       = "${module.load-balanced-vms.loadbalancer_ipv4}"
 }

@@ -13,31 +13,6 @@ variable "ibm_sl_api_key" {
   description = "Your IBM Cloud API Key"
 }
 
-variable "myOrg" {
-  type = "string"
-  description = "Your Bluemix ORG"
-}
-
-variable "mySpace" {
-  type = "string"
-  description = "Your Bluemix Space"
-}
-
-variable "cloudantuser" {
-  type = "string"
-  description = "the cloudant user name for the shopDB"
-}
-
-variable "cloudantpass" {
-  type = "string"
-  description = "the cloudant user password for the shopDB"
-}
-
-variable "cloudanturl" {
-  type = "string"
-  description = "the cloudant url for the shopDB"
-}
-
 ######################################################################
 # The datacenter to deploy to
 variable datacenter {

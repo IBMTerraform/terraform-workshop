@@ -7,5 +7,5 @@ output "public_ipv6s" {
 }
 
 output "loadbalancer_ipv4" {
-  value = "ibm_lb.lb.ip_address"
+  value = "${ibm_lb.lb.ip_address}"
 }

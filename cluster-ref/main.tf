@@ -42,8 +42,19 @@ data "ibm_container_cluster_config" "cluster_cfg" {
 # Reference the cluster
 ################################################
 data "ibm_container_cluster" "shop_cluster" {
-  cluster_name_id = "${var.myClustername}"
-  org_guid        = "${data.ibm_org.orgData.id}"
-  space_guid      = "${data.ibm_space.spaceData.id}"
-  account_guid    = "${data.ibm_account.accountData.id}"
+  cluster_name_id             = "${var.myClustername}"
+  org_guid                    = "${data.ibm_org.orgData.id}"
+  space_guid                  = "${data.ibm_space.spaceData.id}"
+  account_guid                = "${data.ibm_account.accountData.id}"
+}
+
+################################################
+# Find worker IP addresses
+################################################
+data "ibm_container_cluster_worker" "shop_cluster_workers" {
+  count                       = "${data.ibm_container_cluster.shop_cluster.worker_count}"
+  worker_id                   = "${element(data.ibm_container_cluster.shop_cluster.workers, count.index)}"
+  org_guid                    = "${data.ibm_org.orgData.id}"
+  space_guid                  = "${data.ibm_space.spaceData.id}"
+  account_guid                = "${data.ibm_account.accountData.id}"
 }
