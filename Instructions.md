@@ -9,8 +9,8 @@
 3. As you are reading this, you should already be here, but if you printed this instructions, point your browser to `https://github.com/ICU2017Schematics/ICU2017Lab` or simply click this <a href="https://github.com/ICU2017Schematics/ICU2017Lab">link</a>.
 4. Click on ![supplies][supplies.zip]
 4. Open a new browser tab (or window) and point it to "https://console.bluemix.net", click the "Login" button and provide the credentials.
-5. Once logged in, switch to Region _US South_, Organization _ICU2017_ and Space _dev_ like shown ![Region _US South_, Organization _ICU2017_ and Space _dev_][images/regionselector.png]
-6. Open the main navigation on the leftmost side ![main menu][images/mainmenu.png]
+5. Once logged in, switch to Region _US South_, Organization _ICU2017_ and Space _dev_ like shown ![Region _US South_, Organization _ICU2017_ and Space _dev_][images/regionselector.png?raw=true]
+6. Open the main navigation on the leftmost side ![main menu][images/mainmenu.png?raw=true]
 7. Click on **Schematics** in that menu
 
 ---
@@ -21,7 +21,7 @@
 3. Enter the following git URL in the _Source Control URL_ entry field:
 `https://github.com/ICU2017Schematics/ICU2017Lab`
 Note that  as soon as you leave the entry field, the variables that are defined in your `.tf`files in the repository are being pre-populated in the _Variables_ section of your environment. However, there are some empty fields that we now need to fill.
-4. Add the `ibm_bmx_api_key` we provided and male it invisible.
+4. Add the `ibm_bmx_api_key` we provided and make it invisible.
 5. Add the `ibm_sl_api_key` as well and also make it invisible.
 6. Add the `ibm_sl_username`.
 7. Add the `myOrg` variable, set it to `ICU2017`.
