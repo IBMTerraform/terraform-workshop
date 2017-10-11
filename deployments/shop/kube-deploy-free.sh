@@ -5,10 +5,10 @@ then
 fi
 DIR=`dirname $0`
 
-kubectl delete -f ./$DIR/cat-free.yaml
-kubectl delete -f ./$DIR/cart-free.yaml
-kubectl delete -f ./$DIR/gateway-free.yaml
-kubectl delete -f ./$DIR/website-free.yaml
+#kubectl delete -f ./$DIR/cat-free.yaml
+#kubectl delete -f ./$DIR/cart-free.yaml
+#kubectl delete -f ./$DIR/gateway-free.yaml
+#kubectl delete -f ./$DIR/website-free.yaml
 #kubectl delete -f ./$DIR/ship-free.yaml
 
 # deploy: use 'envsubst' command to replace environment variables within the deployment script.
