@@ -12,8 +12,7 @@ DIR=`dirname $0`
 #kubectl delete -f ./$DIR/ship-free.yaml
 
 # deploy: use 'envsubst' command to replace environment variables within the deployment script.
-cat ./$DIR/cat-free.yaml | envsubst | kubectl apply -f - --validate
-cat ./$DIR/cart-free.yaml | envsubst | kubectl apply -f - --validate
-cat ./$DIR/gateway-free.yaml | envsubst | kubectl apply -f - --validate
-cat ./$DIR/website-free.yaml | envsubst | kubectl apply -f - --validate
-#cat ./$DIR/ship-free.yaml | envsubst | kubectl apply -f - --validate
+perl -p -i -e 's/\$\{([^}]+)\}/defined $ENV{$1} ? $ENV{$1} : $&/eg' < ./$DIR/cat-free.yaml | kubectl apply -f - --validate
+perl -p -i -e 's/\$\{([^}]+)\}/defined $ENV{$1} ? $ENV{$1} : $&/eg' < ./$DIR/cart-free.yaml | kubectl apply -f - --validate
+perl -p -i -e 's/\$\{([^}]+)\}/defined $ENV{$1} ? $ENV{$1} : $&/eg' < ./$DIR/gateway-free.yaml | kubectl apply -f - --validate
+perl -p -i -e 's/\$\{([^}]+)\}/defined $ENV{$1} ? $ENV{$1} : $&/eg' < ./$DIR/website-free.yaml | kubectl apply -f - --validate

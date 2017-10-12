@@ -65,7 +65,6 @@ module "shopDBCloudant" {
 resource "null_resource" "kube-deploy" {
   provisioner "local-exec" {
     command                   = <<EOT
-    apt-get -y install gettext-base && \
 CLOUDANT_USER="${module.shopDBCloudant.shopDbUser}" \
 CLOUDANT_PASS="${module.shopDBCloudant.shopDbPassword}" \
 CLOUDANT_URL="https://${module.shopDBCloudant.shopDbHost}" \
