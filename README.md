@@ -5,8 +5,7 @@
 This repository will create a whole web shop application as a 3-tier architecture.
 
 **Overall Process**
-![regionselector](https://github.com/ICU2017Schematics/ICU2017Lab/blob/master/images/regionselector.png?raw=true)
-![regionselector2](images/regionselector.png?raw=true)
+
 You should use Cloud Schematics to create this web shop infrastructure as well as the deployments.
 Please see the [step-by-step guide](https://github.com/ICU2017Schematics/ICU2017Lab/blob/master/Instructions.md)
 
