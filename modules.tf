@@ -5,13 +5,13 @@
 ##############################################################################
 # Call the module to create a free Kubernetes cluster - use either or
 ##############################################################################
-// module "shopCluster" {
-//   source                      = "./free-cluster"
-//   ibm_bmx_api_key             = "${var.ibm_bmx_api_key}"
-//   myOrg                       = "${var.myOrg}"
-//   mySpace                     = "${var.mySpace}"
-//   myClustername               = "${var.myClustername}"
-// }
+module "shopCluster" {
+  source                      = "./free-cluster"
+  ibm_bmx_api_key             = "${var.ibm_bmx_api_key}"
+  myOrg                       = "${var.myOrg}"
+  mySpace                     = "${var.mySpace}"
+  myClustername               = "${var.myClustername}"
+}
 
 ##############################################################################
 # Call the module to create a paid 2-node Kubernetes cluster - use either or
@@ -29,17 +29,6 @@
 // }
 
 ##############################################################################
-# Just referece a pre-provisioned cluster for now in interest of time
-##############################################################################
-module "shopCluster" {
-  source                      = "./cluster-ref"
-  ibm_bmx_api_key             = "${var.ibm_bmx_api_key}"
-  myOrg                       = "${var.myOrg}"
-  mySpace                     = "${var.mySpace}"
-  myClustername               = "${var.myClustername}"
-}
-
-##############################################################################
 # Create the load-balanced VMs to host the
 ##############################################################################
 module "load-balanced-vms" {
@@ -53,10 +42,11 @@ module "load-balanced-vms" {
 # Call the module to reference the already existing database
 ##############################################################################
 module "shopDBCloudant" {
-  source                      = "./cloudant-ref"
+  source                      = "./cloudant"
   ibm_bmx_api_key             = "${var.ibm_bmx_api_key}"
   myOrg                       = "${var.myOrg}"
   mySpace                     = "${var.mySpace}"
+  subdir                      = "./cloudant"
 }
 
 ##############################################################################
@@ -73,16 +63,4 @@ KUBECONFIG="${module.shopCluster.cluster_config}" \
  ./deployments/shop/kube-deploy-free.sh
 EOT
   }
-}
-
-output "cluster_config" {
-  value                       = "${module.shopCluster.cluster_config}"
-}
-
-output "cluster_ips" {
-  value                       = "${module.shopCluster.cluster_ips}"
-}
-
-output "loadbalancer_ip" {
-  value                       = "${module.load-balanced-vms.loadbalancer_ipv4}"
 }

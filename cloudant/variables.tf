@@ -21,3 +21,7 @@ variable "region" {
   description                 = "Bluemix region"
   default                     = "eu-gb"
 }
+
+variable "subdir" {
+  default                     = "."
+}

@@ -42,6 +42,6 @@ resource "ibm_service_key" "serviceKey" {
   # Load database
   ################################################
   provisioner "local-exec" {
-    command                    = "./loadDb.sh ${ibm_service_key.serviceKey.credentials.url}"
+    command                    = "${var.subdir}/loadDb.sh ${ibm_service_key.serviceKey.credentials.url}"
   }
 }

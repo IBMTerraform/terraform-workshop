@@ -24,3 +24,11 @@ variable "region" {
   description                 = "Bluemix region"
   default                     = "eu-gb"
 }
+
+variable "workers" {
+
+  default = [{
+    name                      = "worker1"
+    action                    = "add"
+  }]
+}

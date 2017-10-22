@@ -47,12 +47,27 @@ resource "ibm_container_cluster" "shop_cluster" {
   machine_type                = "free"
   isolation                   = "public"
 
-  workers = [{
-    name                      = "worker1"
+  workers                     = "${var.workers}"
 
-    action                    = "add"
-  }]
+  org_guid                    = "${data.ibm_org.orgData.id}"
+  space_guid                  = "${data.ibm_space.spaceData.id}"
+  account_guid                = "${data.ibm_account.accountData.id}"
+}
 
+################################################
+# Find worker IP addresses
+################################################
+data "ibm_container_cluster" "shop_cluster" {
+  cluster_name_id             = "${var.myClustername}"
+  org_guid                    = "${data.ibm_org.orgData.id}"
+  space_guid                  = "${data.ibm_space.spaceData.id}"
+  account_guid                = "${data.ibm_account.accountData.id}"
+  depends_on                  = ["ibm_container_cluster.shop_cluster"]
+}
+
+data "ibm_container_cluster_worker" "shop_cluster_workers" {
+  count                       = "1"
+  worker_id                   = "${element(data.ibm_container_cluster.shop_cluster.workers, count.index)}"
   org_guid                    = "${data.ibm_org.orgData.id}"
   space_guid                  = "${data.ibm_space.spaceData.id}"
   account_guid                = "${data.ibm_account.accountData.id}"
