@@ -17,7 +17,7 @@ In this lab you will use Terraform along with the [IBM Cloud Provider](https://i
 2. Open a browser
 3. As you are reading this, you should already be here, but if you printed these instructions, point your browser to `https://github.com/IBMTerraform/terraform-workshop` or <a href="https://github.com/IBMTerraform/terraform-workshop">click here</a>.
 4. Open a new browser tab (or window) and point it to "_https://bluemix.net_", click the "Login" button and provide the credentials.
-5. Once logged in, switch to Region _US South_, Organization _Think2018_ and Space _dev_ like shown ![regionselector](https://github.com/ICU2017Schematics/ICU2017Lab/blob/master/images/regionselector.png?raw=true)
+5. Once logged in, switch to Region _US South_, Organization _Think2018_ and Space _dev_ like shown ![region](./images/region.png)
 6. Open up a Terminal (CLI) window by clicking on the icon in your desktop. (You might need to move or minimize the browser window to see the desktop icon)
 
 Our GitHub repository has all the terraform definition files ("resource files" for our lab already developed. Type in this command in the terminal to copy the repository into your local environment:
