@@ -155,3 +155,173 @@ Click on [this link](https://ibm-cloud.github.io/tf-ibm-docs/v0.7.0/r/service_in
 
 The "homepage" of the IBM Cloud Provider is https://ibm-cloud.github.io/tf-ibm-docs. Every IBM Cloud resource that terraform supports is there. The provider is an opensource project and is updated regularly to include new resources and fix defects as needed.
 
+### Destroying Resources
+
+In the terminal perform a `terraform destroy` command to clean up this exercise. You will be asked to confirm that you want to destroy the resources -- type "yes" to confirm.
+
+![](./images/ex01_destroy.png)
+
+## Exercise 02 - Creating an IBM Containers Cluster
+
+In this exercise you will use terraform to create an IBM Containers cluster with a single worker node. You will also learn about the best practices for refactoring variables definitions and values to maximize reuse.
+
+First, change to the `ex02` directory and run the `terraform init` command to initialize the directory with the needed cloud providers for terraform.
+
+```
+cd ../ex02
+terraform init
+```
+
+Open up a new VS code workspace with a `code .` command and click on the `terraform.tfvars` file to view it.
+
+![](./images/ex02_tfvars.png)
+
+Any file with a `tfvars` extension is used to initialize the values of variables. You DO NOT typically version control your _tfvars_ file. They stay local to your system.
+
+The value of using a _tfvars_ file is that you can separate variable *declaration* (and default values) with the *actual* values you want to use in this instance. This makes it easier to modify configuration parameters without requiring new branches and check ins to version control.
+
+The `terraform.tfvars` file is just a list of `key = value` pairs. Edit the file so it includes the proper Bluemix API key, region, org, and space.
+
+Now run a `terraform plan`. Your output will look something like this:
+
+![](./images/ex02_plan.png)
+
+If everything looks good you can go ahead and run a `terraform apply`.
+
+![](./images/ex02_apply.png)
+
+Creating a container cluster can take 5-10 minutes. While you are waiting go to the IBM Cloud Provider documentation for `container_cluster` and look through all the options you have to configure the cluster:
+
+- [container_cluster docs](https://ibm-cloud.github.io/tf-ibm-docs/v0.6.0/r/container_cluster.html)
+- [container_cluster\_config docs](https://ibm-cloud.github.io/tf-ibm-docs/v0.6.0/d/container_cluster_config.html)
+
+Then spend some time in the VS Code editor looking at the `main.tf` file where we define the container resource terraform is creating.
+
+Once the cluster is created you can go back to your IBM Cloud dashboard UI and see it listed in the "Clusters" section.
+
+### Destroying the Container Cluster
+
+In the terminal perform a `terraform destroy` command to clean up this exercise. You will be asked to confirm that you want to destroy the resources -- type "yes" to confirm.
+
+![](./images/ex01_destroy.png)
+
+## Exercise 03 - Creating a Loadbalancer and Back End Group of VMs
+
+In this exercise we will be looking at a larger set of IBM Cloud resources that are configured to work together. You will use terraform to create a front end loadbalancer and back-end group of virtual machines.
+
+Change to `ex03` directory and run `terraform init`. Open a new VS Code window for this exercise and modify the `terraform.tfvars` files with the correct Bluemix API key, org, space, and Softlayer user account name and API Key.
+
+_NOTE: you will be given Softlayer credentials for this exercise by your lab instructor. If credentials are not available you can read through the description here and the terraform files and get 99% of the value_
+
+```
+cd ../ex03
+terraform init
+code .
+```
+
+![](./images/ex03_tfvars.png)
+
+Look over the documentation of the new resources you will be creating:
+
+- [load balancer](https://ibm-cloud.github.io/tf-ibm-docs/v0.6.0/r/lb.html)
+- [load balancer service](https://ibm-cloud.github.io/tf-ibm-docs/v0.6.0/r/lb_service.html)
+- [load balancer service group](https://ibm-cloud.github.io/tf-ibm-docs/v0.6.0/r/lb_service_group.html)
+- [ssh key](https://ibm-cloud.github.io/tf-ibm-docs/v0.6.0/r/compute_ssh_key.html)
+- [virtual machine](https://ibm-cloud.github.io/tf-ibm-docs/v0.6.0/r/compute_vm_instance.html)
+
+This lab does not cover the details of each service but at a high level you are defining a load balance service to split incoming traffic load across a set of virtual machines. Each virtual machine has an SSH key you can use to log into the machine.
+
+## Counting and Generating Random Names
+
+In the previous exercises terraform created a single resource with a unique name that you provided. Here we want to create a pool of virtual machines using a reusable resource definition. This way the dev environment can create 2 VMs for development, staging 5, while pre-prod and production environments deploy 10 (or whatever the real values are).
+
+There is a terraform provider called "random" that generates random identifiers that can be used as a prefix or suffix to a base name. You can learn more about the random provider [here]().
+
+In this exercise the `compute_vm_instance` resource definition uses the random provider in just this fashion (see `main.tf`):
+
+```
+resource "ibm_compute_vm_instance" "node" {
+  # number of nodes to create, will iterate over this resource
+  count                       = "${var.node_count}"
+  # demo hostname and domain
+  hostname                    = "node-${random_id.short_id.id}"
+  domain                      = "mybluemix.net"
+  ...
+```
+
+the `hostname` parameter of the VM will be a name like "node-X34B" because of the use of the `random_id` resource in the definition of hostname.
+
+There is another "tricky" thing happening here. Terraform is using this resource definition of a VM in a loop. There is a pseudo-variable for all resources called `count` that acts like a loop or counter.
+
+If you set `count` to 0 then the resource is not created (or it is deleted if it already exists). If you set it to 1 then a single instance is created. If you set it to a value greater than 1 then that resource definition is instantiated `count` times. 
+
+By combining `count` with `random_id` you can ensure a unique name for each resource even if they are of the same resource type.
+
+### Deploying Code and Initializing a Resource
+
+It is common to want to initialize a resource after it has been created. Terraform has the notion of _provisioners_ to handle this situation. A "provisioner" in the terraform world refers to a script that runs after a resource is created.
+
+There are prebuilt provisioners for _chef_ and _salt_. These are documented in the provisioners section of the main Terraform docs [here](https://www.terraform.io/docs/provisioners/index.html).
+
+The generic case of provisioner is an "exec" provisioner and there are two types:
+
+- local_exec where a script or program is run from your host machine to configure a resource
+- remote_exec where a script or program is run *on the resource* itself to configure the resource
+
+If you look at the `compute_vm_instance` definition in `main.tf` you will see a "provisioner" section in the resource definition:
+
+```
+  provisioner "remote-exec" {
+    connection {
+        type                  = "ssh"
+        user                  = "root"
+        private_key           = "${file("${path.module}/id_lb")}"
+    }
+    inline                    = [
+      "apt-get update -y",
+      # Install docker
+      "wget -qO- https://get.docker.com/ | sh",
+      "apt-get install --yes --allow-downgrades --allow-remove-essential --allow-change-held-packages  docker-compose",
+      # Install docker-compose
+      "COMPOSE_VERSION=`git ls-remote https://github.com/docker/compose | grep refs/tags | grep -oP \"[0-9]+\\.[0-9][0-9]+\\.[0-9]+$\" | tail -n 1`",
+      "curl -L https://github.com/docker/compose/releases/download/$${COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose",
+      "chmod +x /usr/local/bin/docker-compose",
+      "curl -L https://raw.githubusercontent.com/docker/compose/$${COMPOSE_VERSION}/contrib/completion/bash/docker-compose > /etc/bash_completion.d/docker-compose",
+      # Start the fulfillment apply
+      "docker run -d -p 3000:3000 mkubik/ship"
+    ]
+  }
+```
+
+This is a _remote-exec_ provisioner that runs after the virtual machine has been created. The provisioner SSH's into the VM and runs a script that installs a set of application software on the VM. 
+
+If you were provisioning something like a Cloudant database instance there is no concept of "remote-exec" common to all IBM Cloud services. In the case of an IBM Cloud service like Cloudant you would use a local exec provisioner to load the database with records, etc. for initialization.
+
+### Plan, Apply, Destroy
+
+You can go ahead and run through the usual cycle of terraform commands to create the pool of virtual machines and front end load balancer:
+
+```
+terraform plan
+....
+terraform apply
+....
+terraform destroy
+...
+```
+
+## Wraping Up
+
+You made it!
+
+In this lab you've learned how to use terraform to create IBM Cloud services like Cloudant, Container clusters, virtual machines, loadbalancers, and even SSH keys. Along the way you've learned about separating variable declarations from actual values, how to use the `count` variable as a looping construct, and how to generate random names.
+
+Congratulations.
+
+Terraform is a rich tool with a lot of features and capabilities. We have only scratched the surface here with what you can do with Terraform and the IBM Cloud Provider. For more information see these resources:
+
+- [IBM Cloud Provider Documentation](https://ibm-cloud.github.io/tf-ibm-docs/)
+- [Terraform Documentation](https://www.terraform.io/docs/index.html)
+- [Terraform Up and Running](http://amzn.to/2HdwHnJ)
+- [Infrastructure as Code: Managing Servers in the Cloud](http://amzn.to/2oSp9jj)
+
