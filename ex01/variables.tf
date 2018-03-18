@@ -1,7 +1,7 @@
 variable "bluemix-api-key" {
   type                        = "string"
   description                 = "Your Bluemix API Key"
-  default                     = "KnIBFHcSTS-FKJwuREJam5ebVGf2tspI2TeU57w3z0ZJ"
+  default                     = ""
 }
 
 variable "org" {

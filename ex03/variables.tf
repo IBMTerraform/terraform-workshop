@@ -1,8 +1,3 @@
-variable "ibm_bmx_api_key" {
-  type = "string"
-  description = "Your Bluemix API Key (optional)"
-}
-
 variable "ibm_sl_username" {
   type = "string"
   description = "Your IBM Cloud User Name"
