@@ -72,7 +72,7 @@ code .
 
 This brings up VisualStudio Code ("VS Code"). On the left is a list of the files in the current directory. Click on the `variables.tf` file. 
 
-![./images/ex01_variables.png]
+![](./images/ex01_variables.png)
 
 Replace the value of the variable "bluemix-api-key" with the API key you just generated (HINT: just go back to the terminal and copy/paste the value of the API key into VS Code).
 
