@@ -42,6 +42,10 @@ If you list the contents of the directory with an `ls` command in the terminal y
 
 During the run of `terraform plan` the system will ask you for your IBM Cloud account `org` and `space`. Enter these in. 
 
+```
+For Think! The org and space you logged into is `TerraformThink2018` and `dev`
+```
+
 Your output will look something like this:
 
 ![](./images/ex01_plan.png)
