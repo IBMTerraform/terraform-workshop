@@ -1,0 +1,6 @@
+#
+# You can use these credentials during the Think conference
+#
+
+IBMTerraform@gmail.com
+Think2018!
