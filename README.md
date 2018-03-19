@@ -17,7 +17,7 @@ In this lab you will use Terraform along with the [IBM Cloud Provider](https://i
 2. Open a browser
 3. As you are reading this, you should already be here, but if you printed these instructions, point your browser to `https://github.com/IBMTerraform/terraform-workshop` or <a href="https://github.com/IBMTerraform/terraform-workshop">click here</a>.
 4. Open a new browser tab (or window) and point it to "_https://bluemix.net_", click the "Login" button and provide the credentials.
-5. Once logged in, switch to Region _US South_, Organization _Think2018_ and Space _dev_ like shown ![region](./images/region.png)
+5. Once logged in, switch to Region _US South_, Organization _TerraformThink2018_ and Space _dev_ like shown ![region](./images/region.png)
 6. Open up a Terminal (CLI) window by clicking on the icon in your desktop. (You might need to move or minimize the browser window to see the desktop icon)
 
 Our GitHub repository has all the terraform definition files ("resource files" for our lab already developed. Type in this command in the terminal to copy the repository into your local environment:
@@ -33,7 +33,7 @@ Now you are ready to create your first IBM Cloud resource
 Change into the `ex01` directory by entering this command into the terminal:
 
 ```
-cd Think2018/ex01
+cd terraform-workshop/ex01
 ```
 
 The whole idea behind _infrastructure as code_ is to describe *what* you want your application environment to look like and then let a tool like terraform figure out how to best give you that. The "how" is always a combination of creating, deleting, and updating resources. The point here is that terraform takes care of the "how" -- you just specify "what" you ultimately want.
@@ -182,6 +182,8 @@ The value of using a _tfvars_ file is that you can separate variable *declaratio
 
 The `terraform.tfvars` file is just a list of `key = value` pairs. Edit the file so it includes the proper Bluemix API key, region, org, and space.
 
+_NB: Typically your would NOT place your tfvars file under version control since this contains private information like API keys. We are just including the file here in the workshop for example purposes._
+
 Now run a `terraform plan`. Your output will look something like this:
 
 ![](./images/ex02_plan.png)
@@ -192,8 +194,8 @@ If everything looks good you can go ahead and run a `terraform apply`.
 
 Creating a container cluster can take 5-10 minutes. While you are waiting go to the IBM Cloud Provider documentation for `container_cluster` and look through all the options you have to configure the cluster:
 
-- [container_cluster docs](https://ibm-cloud.github.io/tf-ibm-docs/v0.6.0/r/container_cluster.html)
-- [container_cluster\_config docs](https://ibm-cloud.github.io/tf-ibm-docs/v0.6.0/d/container_cluster_config.html)
+- [container_cluster docs](https://ibm-cloud.github.io/tf-ibm-docs/v0.7.0/r/container_cluster.html)
+- [container_cluster\_config docs](https://ibm-cloud.github.io/tf-ibm-docs/v0.7.0/d/container_cluster_config.html)
 
 Then spend some time in the VS Code editor looking at the `main.tf` file where we define the container resource terraform is creating.
 
@@ -235,7 +237,7 @@ This lab does not cover the details of each service but at a high level you are 
 
 In the previous exercises terraform created a single resource with a unique name that you provided. Here we want to create a pool of virtual machines using a reusable resource definition. This way the dev environment can create 2 VMs for development, staging 5, while pre-prod and production environments deploy 10 (or whatever the real values are).
 
-There is a terraform provider called "random" that generates random identifiers that can be used as a prefix or suffix to a base name. You can learn more about the random provider [here]().
+There is a terraform provider called "random" that generates random identifiers that can be used as a prefix or suffix to a base name. You can learn more about the random provider [here](https://www.terraform.io/docs/providers/random/index.html).
 
 In this exercise the `compute_vm_instance` resource definition uses the random provider in just this fashion (see `main.tf`):
 
@@ -321,6 +323,7 @@ Congratulations.
 Terraform is a rich tool with a lot of features and capabilities. We have only scratched the surface here with what you can do with Terraform and the IBM Cloud Provider. For more information see these resources:
 
 - [IBM Cloud Provider Documentation](https://ibm-cloud.github.io/tf-ibm-docs/)
+- [IBM Cloud Provider Repository](https://github.com/Cloud-Schematics)
 - [Terraform Documentation](https://www.terraform.io/docs/index.html)
 - [Terraform Up and Running](http://amzn.to/2HdwHnJ)
 - [Infrastructure as Code: Managing Servers in the Cloud](http://amzn.to/2oSp9jj)

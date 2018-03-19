@@ -1,0 +1,6 @@
+ibm_sl_username = ""
+ibm_sl_api_key = ""
+myClusterName = "think-cluster"
+datacenter = "dal10"
+public_vlan_id = "896"
+private_vlan_id = "936"

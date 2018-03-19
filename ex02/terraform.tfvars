@@ -1,0 +1,7 @@
+bluemix-api-key = ""
+org = ""
+space = "dev"
+myClusterName = "think-cluster"
+datacenter = "dal10"
+public_vlan_id = "896"
+private_vlan_id = "936"

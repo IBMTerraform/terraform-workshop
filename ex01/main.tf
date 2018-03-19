@@ -8,7 +8,7 @@ data "ibm_space" "spaceData" {
 }
 
 resource "ibm_service_instance" "shopDb" {
-  name                        = "shopDB"
+  name                        = "shopDB-${random_id.short_id.id}"
   space_guid                  = "${data.ibm_space.spaceData.id}"
   service                     = "cloudantNoSQLDB"
   plan                        = "Lite"
@@ -16,6 +16,10 @@ resource "ibm_service_instance" "shopDb" {
 }
 
 resource "ibm_service_key" "serviceKey" {
-  name                        = "mycloudantkey"
+  name                        = "mycloudantkey-${random_id.short_id.id}"
   service_instance_guid       = "${ibm_service_instance.shopDb.id}"
+}
+
+resource "random_id" "short_id" {
+  byte_length                 = 2
 }

@@ -1,0 +1,6 @@
+ibm_sl_username = "1609129_ibmterraform@gmail.com"
+ibm_sl_api_key = "9c42d1e23c6416b4c388e8db6cf555cb178cc6a74cbe7c14863790e7117dd6d7"
+myClusterName = "think-cluster"
+datacenter = "dal10"
+public_vlan_id = "896"
+private_vlan_id = "936"
