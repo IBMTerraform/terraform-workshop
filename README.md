@@ -16,7 +16,7 @@ In this lab you will use Terraform along with the [IBM Cloud Provider](https://i
 1. Logon to your Lab machine (the default password is _passw0rd_)
 2. Open a browser
 3. As you are reading this, you should already be here, but if you printed these instructions, point your browser to `https://github.com/IBMTerraform/terraform-workshop` or <a href="https://github.com/IBMTerraform/terraform-workshop">click here</a>.
-4. Open a new browser tab (or window) and point it to "_https://bluemix.net_", click the "Login" button and provide the credentials ![click here](./think2018.txt) to see the temporary credentials set up for the Think conference.
+4. Open a new browser tab (or window) and point it to "_https://bluemix.net_", click the "Login" button and provide the credentials [click here](./think2018.txt) to see the temporary credentials set up for the Think conference.
 5. Once logged in, switch to Region _US South_, Organization _TerraformThink2018_ and Space _dev_ like shown ![region](./images/region.png)
 6. Open up a Terminal (CLI) window by clicking on the icon in your desktop. (You might need to move or minimize the browser window to see the desktop icon)
 
