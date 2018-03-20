@@ -13,10 +13,10 @@ In this lab you will use Terraform along with the [IBM Cloud Provider](https://i
 
 ## Getting Started
 
-1. Logon to your Lab machine
+1. Logon to your Lab machine (the default password is _passw0rd_)
 2. Open a browser
 3. As you are reading this, you should already be here, but if you printed these instructions, point your browser to `https://github.com/IBMTerraform/terraform-workshop` or <a href="https://github.com/IBMTerraform/terraform-workshop">click here</a>.
-4. Open a new browser tab (or window) and point it to "_https://bluemix.net_", click the "Login" button and provide the credentials.
+4. Open a new browser tab (or window) and point it to "_https://bluemix.net_", click the "Login" button and provide the credentials ![click here](./think2018.txt) to see the temporary credentials set up for the Think conference.
 5. Once logged in, switch to Region _US South_, Organization _TerraformThink2018_ and Space _dev_ like shown ![region](./images/region.png)
 6. Open up a Terminal (CLI) window by clicking on the icon in your desktop. (You might need to move or minimize the browser window to see the desktop icon)
 
@@ -43,7 +43,7 @@ If you list the contents of the directory with an `ls` command in the terminal y
 During the run of `terraform plan` the system will ask you for your IBM Cloud account `org` and `space`. Enter these in. 
 
 ```
-For Think! The org and space you logged into is `TerraformThink2018` and `dev`
+REMINDER: For Think! The org and space you use is `TerraformThink2018` and `dev`
 ```
 
 Your output will look something like this:
@@ -215,9 +215,9 @@ In the terminal perform a `terraform destroy` command to clean up this exercise.
 
 In this exercise we will be looking at a larger set of IBM Cloud resources that are configured to work together. You will use terraform to create a front end loadbalancer and back-end group of virtual machines.
 
-Change to `ex03` directory and run `terraform init`. Open a new VS Code window for this exercise and modify the `terraform.tfvars` files with the correct Bluemix API key, org, space, and Softlayer user account name and API Key.
+Change to `ex03` directory and run `terraform init`. Open a new VS Code window for this exercise and modify the `terraform.tfvars` files with the correct Softlayer user account name and API Key.
 
-_NOTE: you will be given Softlayer credentials for this exercise by your lab instructor. If credentials are not available you can read through the description here and the terraform files and get 99% of the value_
+_NOTE: For this exercise you need a separate set of IBM Cloud Infrastructure (Softlayer) credentials. ![Click here](./think2018.txt) to view these temporary credentials for Think! If the credentials are no longer available you can read this through exercise to understand the basics of creating multiple IBM Cloud resources using Terraform._
 
 ```
 cd ../ex03

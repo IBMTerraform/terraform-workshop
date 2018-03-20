@@ -1,6 +1,10 @@
 #
-# You can use these credentials during the Think conference
+# The following IBM Cloud Account has been set up for attendees of the Think! conference:
 #
 
-IBMTerraform@gmail.com
-Think2018!
+# IBM Cloud Account
+username: IBMTerraform@gmail.com
+password: Think2018!
+org: TerraformThink2018
+space: dev
+region: us-south

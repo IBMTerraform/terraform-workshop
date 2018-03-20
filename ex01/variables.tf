@@ -1,21 +1,21 @@
 variable "bluemix-api-key" {
-  type                        = "string"
-  description                 = "Your Bluemix API Key"
-  default                     = ""
+  type        = "string"
+  description = "Your Bluemix API Key"
+  default     = ""
 }
 
 variable "org" {
-  type                        = "string"
-  description                 = "IBM Cloud Account ORG"
+  type        = "string"
+  description = "IBM Cloud Account ORG"
 }
 
 variable "space" {
-  type                        = "string"
-  description                 = "IBM Cloud Account Space"
+  type        = "string"
+  description = "IBM Cloud Account Space"
 }
 
 variable "region" {
-  type                        = "string"
-  description                 = "IBM Cloud Account region"
-  default                     = "us-south"
+  type        = "string"
+  description = "IBM Cloud Account region"
+  default     = "us-south"
 }
