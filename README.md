@@ -217,7 +217,7 @@ In this exercise we will be looking at a larger set of IBM Cloud resources that 
 
 Change to `ex03` directory and run `terraform init`. Open a new VS Code window for this exercise and modify the `terraform.tfvars` files with the correct Softlayer user account name and API Key.
 
-_NOTE: For this exercise you need a separate set of IBM Cloud Infrastructure (Softlayer) credentials. ![Click here](./think2018.txt) to view these temporary credentials for Think! If the credentials are no longer available you can read this through exercise to understand the basics of creating multiple IBM Cloud resources using Terraform._
+_NOTE: For this exercise you need a separate set of IBM Cloud Infrastructure (Softlayer) credentials. [Click here](ex03/think2018.txt) to view these temporary credentials for Think! If the credentials are no longer available you can read this through exercise to understand the basics of creating multiple IBM Cloud resources using Terraform._
 
 ```
 cd ../ex03
